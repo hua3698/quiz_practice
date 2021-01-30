@@ -3,8 +3,22 @@
 date_default_timezone_set("Asia/Taipei");
 session_start();
 
-$Member=new DB("member");
-$total=new DB("total");
+$Mem=new DB("member");
+$Total=new DB("total");
+$News=new DB("news");
+
+$chk=$Total->find(['date'=>date("Y-m-d")]);
+
+if(empty($_SESSION['total']) && empty($chk)){
+    $Total->save(['date'=>date("Y-m-d"),'total'=>1]);
+    $_SESSION['total']=1;
+}else if(!empty($chk) && empty($_SESSION['total'])){
+    $chk['total']++;
+    $Total->save($chk);
+    $_SESSION['total']=1;
+}else if(!empty($_SESSION['total']) && $chk==null){  //異常情形 如清空資料庫但還有session
+    $Total->save(["date"=>date("Y-m-d"),"total"=>1]);
+}
 
 class DB{
     protected $table;
@@ -87,20 +101,16 @@ class DB{
         }else{
             $sql= "insert into $this->table (`".implode("`,`",array_keys($arr))."`) values('".implode("','",$arr)."') ";
         }
-        echo $sql;
+        // echo $sql;
         return $this->pdo->exec($sql);
     }
 
     function q($sql){
         return $this->pdo->query($sql)->fetchAll();
     }
-
-    function plo($url){
-        header("location:".$url);
-    }
-    function jlo($url){
-        return "location.href=$url";
-    }
+}
+function to($url){
+    header("location:".$url);
 }
 
 ?>
