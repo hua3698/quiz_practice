@@ -8,5 +8,5 @@ foreach($_POST['id'] as $id){
         $News->save($news);
     }
 }
-to("../backend.php?do=news");
+plo("../backend.php?do=news");
 ?>

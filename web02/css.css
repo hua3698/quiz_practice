@@ -37,7 +37,7 @@ a:hover
 {
 	padding: 2px;
 	width: 1024px;
-	height: 768px;
+	max-height: 768px;
 	background: #FFF;
 	margin: 10px auto 10px auto;
 	box-shadow: #999 0px 0px 1px .3px;
@@ -56,7 +56,6 @@ a:hover
 	padding:2px;
 	background:url(img/02B04.png) repeat-y;
 	/*background-size:100% auto;*/
-	min-height:568px;
 	display:inline-block;
 	vertical-align:top;
 	position:relative;
@@ -70,7 +69,6 @@ a:hover
 {
 	display:inline-block;
 	width:78%;
-	height:565px;
 	padding:4px;
 	border:solid 1px #000000;
 	overflow:auto;

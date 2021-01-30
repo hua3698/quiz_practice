@@ -109,7 +109,7 @@ class DB{
         return $this->pdo->query($sql)->fetchAll();
     }
 }
-function to($url){
+function plo($url){
     header("location:".$url);
 }
 
