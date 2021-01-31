@@ -14,9 +14,6 @@ include_once "base.php";
 </head>
 
 <body>
-	<div id="alerr" style="background:rgba(51,51,51,0.8); color:#FFF; min-height:100px; width:300px; position:fixed; display:none; z-index:9999; overflow:auto;">
-		<pre id="ssaa"></pre>
-	</div>
 	<div id="all">
 		<div id="title">
 			<?php
@@ -34,7 +31,7 @@ include_once "base.php";
 				<a class="blo" href="?do=po">分類網誌</a>
 				<a class="blo" href="?do=news">最新文章</a>
 				<a class="blo" href="?do=pop">人氣文章</a>
-				<a class="blo" href="?do=know">講座訊息</a>
+				<a class="blo" href="?do=#">講座訊息</a>
 				<a class="blo" href="?do=que">問卷調查</a>
 			</div>
 			<div class="hal" id="main">

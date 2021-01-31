@@ -6,6 +6,8 @@ session_start();
 $Mem=new DB("member");
 $Total=new DB("total");
 $News=new DB("news");
+$Que=new DB("que");
+$Log=new DB("log");
 
 $chk=$Total->find(['date'=>date("Y-m-d")]);
 

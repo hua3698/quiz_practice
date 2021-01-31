@@ -171,7 +171,6 @@ input[type=radio]
 	border-right:#666 1px solid;
 	border-left:none;
 	margin:0px;
-	float:left;
 	display:inline-block;
 	background:#CCC;
 	margin:0px;
@@ -275,9 +274,18 @@ cursor:default;
 	display:inline-block;
 	background-position:0px 2px;
 }
-#alerr h3
+.alerr h3
 {
 	color:#0CF;
+}
+.alerr{
+	background:rgba(51,51,51,0.8); 
+	color:#FFF; 
+	min-height:100px; 
+	width:300px; 
+	position:absolute;
+	display:none; 
+	z-index:9999; 
 }
 .t_int
 {
