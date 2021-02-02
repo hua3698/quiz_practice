@@ -3,11 +3,11 @@
 date_default_timezone_set("Asia/Taipei");
 session_start();
 
-$Mem=new DB("member");
-$Total=new DB("total");
-$News=new DB("news");
-$Que=new DB("que");
-$Log=new DB("log");
+$Mem=new DB("q2_member");
+$Total=new DB("q2_total");
+$News=new DB("q2_news");
+$Que=new DB("q2_que");
+$Log=new DB("q2_log");
 
 $chk=$Total->find(['date'=>date("Y-m-d")]);
 
@@ -24,12 +24,12 @@ if(empty($_SESSION['total']) && empty($chk)){
 
 class DB{
     protected $table;
-    protected $dsn="mysql:host=localhost;dbname=db022;charset=utf8";
+    protected $dsn="mysql:host=localhost;dbname=s1090405;charset=utf8";
     protected $pdo;
 
     function __construct($table){
         $this->table=$table;
-        $this->pdo=new PDO($this->dsn,"root","");
+        $this->pdo=new PDO($this->dsn,"s1090405","s1090405");
     }
 
     function all(...$arg){
