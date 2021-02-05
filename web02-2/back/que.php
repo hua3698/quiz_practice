@@ -60,12 +60,4 @@
         `)
     }
 
-    function que() {
-        // let word=$(this).html()
-        console.log($(this))
-        if (word == "開放") $(this).html("---")
-        else $(word).html("開放")
-        // $.get("api/good.php", {id})
-
-    }
 </script>
