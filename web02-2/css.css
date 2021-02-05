@@ -277,7 +277,16 @@ cursor:default;
 	display:inline-block;
 	background-position:0px 2px;
 }
-#alerr h3
+.alerr{
+	background:rgba(51,51,51,0.8); 
+	color:#FFF; 
+	min-height:100px; 
+	width:300px; 
+	position:fixed; 
+	display:none; 
+	z-index:9999; 
+}
+.alerr h3
 {
 	color:#0CF;
 }

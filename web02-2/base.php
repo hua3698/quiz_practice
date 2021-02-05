@@ -66,18 +66,26 @@ class DB{
     }
     function find($id){
         $sql=" select * from $this->table";
-        foreach($id as $key=>$value){
-            $tmp[]=sprintf("`%s`='%s'",$key,$value);
+        if(is_array($id)){
+            foreach($id as $key=>$value){
+                $tmp[]=sprintf("`%s`='%s'",$key,$value);
+            }
+            $sql.=" where ".implode(" && ",$tmp);
+        }else{
+            $sql.=" where `id`='$id'";
         }
-        $sql.=" where ".implode(" && ",$tmp);
         return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
     function del($id){
         $sql=" delete from $this->table";
-        foreach($id as $key=>$value){
-            $tmp[]=sprintf("`%s`='%s'",$key,$value);
+        if(is_array($id)){
+            foreach($id as $key=>$value){
+                $tmp[]=sprintf("`%s`='%s'",$key,$value);
+            }
+            $sql.=" where ".implode(" && ",$tmp);
+        }else{
+            $sql.=" where `id`='$id'";
         }
-        $sql.=" where ".implode(" && ",$tmp);
         return $this->pdo->exec($sql);
     }
     function save($arr){
@@ -85,10 +93,11 @@ class DB{
             foreach($arr as $key=>$value){
                 $tmp[]=sprintf("`%s`='%s'",$key,$value);
             }
-            $sql="update $this->table set ".implode(",",$tmp);
+            $sql="update $this->table set ".implode(",",$tmp)." where `id`='{$arr['id']}'";
         }else{
             $sql="insert into $this->table (`".implode("`,`",array_keys($arr))."`) values ('".implode("','",$arr)."')";
         }
+        // echo $sql;
         return $this->pdo->exec($sql);
     }
     function q($sql){

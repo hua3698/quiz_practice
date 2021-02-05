@@ -29,6 +29,7 @@
 			echo " | 累積瀏覽：";
 			echo $a[0][0];
 			?>
+			<span style="float: right;"><a href="index.php">回首頁</a></span>
 		</div>
 		<div id="title2"><a href="index.php"><img src="img/02B01.jpg" alt="健康促進網 - 回首頁"></a></div>
 		<div id="mm">
