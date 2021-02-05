@@ -1,4 +1,8 @@
 <fieldset>
+    <legend>最新文章管理</legend>
+    <div>
+        <a href="?do=po_add"><input type="button" value="新增文章"></a>
+    </div>
     <form action="api/b_po.php" method="POST">
         <table width="80%" style="text-align:center;margin:auto">
             <tr>

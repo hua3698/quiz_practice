@@ -22,7 +22,7 @@
 			<!-- 00 月 00 號 Tuesday | 今日瀏覽: 1 | 累積瀏覽: 36  -->
 			<?php
 			$d = $Total->find(['date' => date("Y-m-d")]);
-			$a = $Total->q("select sum(`total`) from total where `date`='" . date("Y-m-d") . "'");
+			$a = $Total->q("select sum(`total`) from total ");
 			echo date("m月d日 l");
 			echo " | 今日瀏覽：";
 			echo $d['total'];
