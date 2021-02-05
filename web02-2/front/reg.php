@@ -30,24 +30,25 @@
 </fieldset>
 
 <script>
-    function reg(){
-        let acc=$("#acc").val();
-        let pw=$("#pw").val();
-        let pw2=$("#pw2").val();
-        let email=$("#email").val();
-        if(acc==""||pw==""||pw2==""||email==""){
-            alert("不可空白")
-        }else if(pw!=pw2){
-            alert("密碼錯誤")
-        }else{
-            $.post("api/chkacc.php?do=reg",{acc,pw,email},function(re){
-                if(re=='1'){
-                    alert("帳號重複");
-                }else{
-                    alert("註冊完成，歡迎加入")
-                    location.href="?do=login"
-                }
-            })
-        }
+function reg(){
+    let acc=$("#acc").val();
+    let pw=$("#pw").val();
+    let pw2=$("#pw2").val();
+    let email=$("#email").val();
+
+    if(acc=="" || pw=="" || pw2=="" || email==""){
+        alert("不可空白");
+    }else if(pw!=pw2){
+        alert("密碼錯誤")
+    }else{
+        $.post("api/chkacc.php?do=reg",{acc,pw,email},function(re){
+            if(re=='1'){
+                alert("帳號重複");
+            }else{
+                alert("註冊完成，歡迎加入");
+                location.href="?do=login";
+            }
+        })
     }
+}
 </script>

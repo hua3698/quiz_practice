@@ -21,13 +21,9 @@
 		<div id="title">
 			<!-- 00 月 00 號 Tuesday | 今日瀏覽: 1 | 累積瀏覽: 36  -->
 			<?php
-			$d = $Total->find(['date' => date("Y-m-d")]);
-			$a = $Total->q("select sum(`total`) from total ");
-			echo date("m月d日 l");
-			echo " | 今日瀏覽：";
-			echo $d['total'];
-			echo " | 累積瀏覽：";
-			echo $a[0][0];
+			$today=$Total->find(['date'=>date("Y-m-d")]);
+			$all=$Total->q(" select sum(`total`) from `total` ");
+			echo date("m月d日 l")." | 今日瀏覽：".$today['total']." |　累積瀏覽：".$all[0][0] ;
 			?>
 			<span style="float: right;"><a href="index.php">回首頁</a></span>
 		</div>
@@ -48,30 +44,26 @@
 							
 					</span>
 					<span style="width:18%; display:inline-block;">
-						<a href="?do=login">
-							<?php
-							if(isset($_SESSION['login'])){
-								if($_SESSION['login']=='admin'){
-									echo "歡迎，".$_SESSION['login']."<br><a href='backend.php'><button>管理</button></a>|<a href='api/logout.php'><button>登出</button></a>";
-								}else{
-									echo "歡迎，".$_SESSION['login']."<a href='api/logout.php'><button>登出</button></a>";
-								}
-							}else{
-								echo "會員登入";
-							}
-							?>
-						</a>
+					<?php
+					if(isset($_SESSION['login'])){
+						if($_SESSION['login']=='admin'){
+							echo "歡迎，".$_SESSION['login']."<br>";
+							echo "<button><a href='backend.php'>管理</a></button> | <button><a href='?do=api/logout.php'>登出</a></button>";
+						}else{
+							echo "歡迎，".$_SESSION['login']."<button><a href='?do=api/logout.php'>登出</a></button>";
+						}
+					}else{
+						echo "<a href='?do=login'>會員登入</a>";
+					}
+					?>
 					</span>
 					<div class="">
-						<?php
-						$do=(isset($_GET['do']))?$_GET['do']:'main';
-						$file="front/".$do.".php";
-						if(file_exists($file)){
-							include_once $file;
-						}else{
-							include_once "front/main.php";
-						}
-						?>
+					<?php
+					$do=(isset($_GET['do']))?$_GET['do']:'main';
+					$file="front/".$do.".php";
+					if(file_exists($file)) include_once $file;
+					else include_once "front/main.php";
+					?>
 					</div>
 				</div>
 			</div>
