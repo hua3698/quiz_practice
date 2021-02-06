@@ -22,13 +22,14 @@
 			<!-- 00 月 00 號 Tuesday | 今日瀏覽: 1 | 累積瀏覽: 36  -->
 			<?php
 			$d = $Total->find(['date' => date("Y-m-d")]);
-			$a = $Total->q("select sum(`total`) from total where `date`='" . date("Y-m-d") . "'");
+			$a = $Total->q("select sum(`total`) from total ");
 			echo date("m月d日 l");
 			echo " | 今日瀏覽：";
 			echo $d['total'];
 			echo " | 累積瀏覽：";
 			echo $a[0][0];
 			?>
+			<span style="float: right;"><a href="index.php">回首頁</a></span>
 		</div>
 		<div id="title2"><a href="index.php"><img src="img/02B01.jpg" alt="健康促進網 - 回首頁"></a></div>
 		<div id="mm">

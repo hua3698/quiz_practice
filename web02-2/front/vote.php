@@ -13,6 +13,7 @@ $ques = $Que->all(['subject' => $_GET['id']]);
         <?php
         }
         ?>
+        <input type="hidden" name="timu" value="<?=$timu['id'];?>">
         <div class="ct"><input type="submit" value="我要投票"></div>
     </form>
 </fieldset>
