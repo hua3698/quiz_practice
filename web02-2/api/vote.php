@@ -1,11 +1,12 @@
 <?php
 include_once "../base.php";
-$timu=$Que->find($_POST['timu']);
-$timu['count']++;
-$Que->save($timu);
+$ti=$Que->find($_POST['timu']);
+$ti['count']++;
+$Que->save($ti);
 
-$ques=$Que->find(['subject'=>$_POST['timu']]);
+$ques=$Que->find($_POST['option']);
 $ques['count']++;
 $Que->save($ques);
-to("../index.php?do=result&timu={$_POST['timu']}");
-?> 
+
+to("../index.php?do=result&timu={$ti['id']}");
+?>

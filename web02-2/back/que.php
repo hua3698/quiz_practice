@@ -1,12 +1,12 @@
 <fieldset>
     <legend>新增問卷</legend>
-    <form action="api/b_que.php" method="POST">
+    <form action="api/b_que.php" method="post">
         <table>
             <tr>
                 <td>問卷名稱<input type="text" name="title" id=""></td>
             </tr>
-            <tr id="add" style="background-color: #eee;">
-                <td>選項<input type="text" name="option[]" id=""><input type="button" value="更多" onclick="more()"></td>
+            <tr id="op">
+                <td>選項<input type="text" name="option[]" id=""><button type="button" onclick="more()">更多</button></td>
             </tr>
             <tr>
                 <td>
@@ -21,7 +21,7 @@
 <fieldset>
     <legend>問卷列表</legend>
     <table>
-        <tr style="background:#eee">
+        <tr>
             <td>問卷名稱</td>
             <td>投票數</td>
             <td>開放</td>
@@ -33,16 +33,11 @@
             <tr>
                 <td><?= $q['que']; ?></td>
                 <td><?= $q['count']; ?></td>
-                <td>
-                    <?php
+                <td><?php
                     if ($q['sh'] == 1) {
-                    ?>
-                        <button type="button" class="open" id="<?= $q['id']; ?>">開放</button>
-                    <?php
+                        echo "<button onclick='op(this)' class='{$q['id']}'>開放</button>";
                     } else {
-                    ?>
-                        <button type="button" class="open" id="<?= $q['id']; ?>">關閉</button>
-                    <?php
+                        echo "<button onclick='op(this)' class='{$q['id']}'>關閉</button>";
                     }
                     ?>
                 </td>
@@ -55,21 +50,20 @@
 
 <script>
     function more() {
-        $("#add").after(`
-        <tr style="background:#eee">
-                <td colspan="2">選項<input type="text" name="option[]" id=""></td>
-            </tr>
+        $("#op").after(`
+        <tr>
+            <td>選項<input type="text" name="option[]" id=""></td>
+        </tr>
         `)
     }
 
-    $(".open").on("click", function() {
-        let word = $(this).html()
-        let id=$(this).attr("id");
-        if (word == '開放') $(this).html("關閉")
-        else $(this).html("開放")
-        // console.log(id)
-        $.get("api/b_que.php", {id},function(re){
-            console.log(re)
+    function op(t) {
+        let word=$(t).html();
+        let id=$(t).attr("class");
+        if(word=='開放') $(t).html("關閉")
+        else $(t).html("開放");
+        $.get("api/op.php",{id},function(){
+            location.reload();
         })
-    })
+    }
 </script>

@@ -1,37 +1,35 @@
-<div>目前位置：首頁 > 分類網誌 > <span id="fun">健康新知</span></div>
-<div style="display: flex;width:80%; margin:5px auto;">
-    <fieldset style="width: 20%;">
+<div>目前位置：首頁 > 分類網誌 > <span id="fun">健康心知</span></div>
+<div style="margin:30px auto;width: 80%;display:flex;">
+    <fieldset style="width: 20%; display:inline-block;">
         <legend>分類網誌</legend>
-        <div><a href="#" class="type" id="t1">健康新知</a></div>
-        <div><a href="#" class="type" id="t2">菸害防治</a></div>
-        <div><a href="#" class="type" id="t3">癌症防治</a></div>
-        <div><a href="#" class="type" id="t4">慢性病防治</a></div>
+        <div><a href="#" id="t1" class="ti">健康新知</a></div>
+        <div><a href="#" id="t2" class="ti">菸害防治</a></div>
+        <div><a href="#" id="t3" class="ti">癌症防治</a></div>
+        <div><a href="#" id="t4" class="ti">慢性病防治</a></div>
     </fieldset>
-    <fieldset style="width: 60%;">
+    <fieldset style="width: 60%; display:inline-block;">
         <legend>文章列表</legend>
-        <div class="text"></div>
+        <div id="bo"></div>
     </fieldset>
 </div>
 
 <script>
-    getTitle(1);
+    newarti(1);
+    $(".ti").on("click", function() {
+        let word = $(this).html();
+        let id = $(this).attr("id").replace("t","");
+        $("#fun").html(word);
+        newarti(id);
+    })
 
-$(".type").on("click",function(){
-    let id=$(this).attr("id").replace("t","")
-    let word=$(this).html()
-    $("#fun").html(word)
-    getTitle(id);
-})
-
-function getTitle(num){
-$.get("api/f_po.php",{case:1,num},function(re){
-    $(".text").html(re)
-})
-}
-
-function getNews(id){
-$.get("api/f_po.php",{case:2,id},function(re){
-    $(".text").html(re)
-})
-}
+    function newarti(id) {
+        $.post("api/f_po.php?do=title",{id},function(re){
+            $("#bo").html(re);
+        })
+    }
+    function newcon(id) {
+        $.post("api/f_po.php?do=content",{id},function(re){
+            $("#bo").html(re);
+        })
+    }
 </script>

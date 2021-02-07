@@ -1,15 +1,16 @@
 <?php
 include_once "../base.php";
-switch($_GET['case']){
-    case 1:
-        $a=$News->all(['type'=>$_GET['num']]);
-        foreach($a as $a){
-            echo "<div><a href='javascript:getNews({$a['id']})'>{$a['title']}</a></div>";
+switch ($_GET['do']) {
+    case 'title':
+        $id = $_POST['id'];
+        $news = $News->all(['type' => $id]);
+        foreach ($news as $n) {
+            echo "<div><a href='#' onclick='newcon({$n['id']})'>{$n['title']}</a></div>";
         }
         break;
-    case 2:
-        $news=$News->find(['id'=>$_GET['id']]);
-        echo "<pre>{$news['text']}</pre>";
+    case 'content':
+        $id = $_POST['id'];
+        $news = $News->find(['id' => $id]);
+        echo "{$news['text']}";
         break;
 }
-?>

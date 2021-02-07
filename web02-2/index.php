@@ -1,4 +1,5 @@
-﻿<?php include_once "base.php";
+﻿<?php
+include_once "base.php";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0039) -->
@@ -14,20 +15,17 @@
 </head>
 
 <body>
-	<div id="alerr" style="background:rgba(51,51,51,0.8); color:#FFF; min-height:100px; width:300px; position:fixed; display:none; z-index:9999; overflow:auto;">
-		<pre id="ssaa"></pre>
-	</div>
 	<div id="all">
 		<div id="title">
-			<!-- 00 月 00 號 Tuesday | 今日瀏覽: 1 | 累積瀏覽: 36  -->
+			<!-- 00 月 00 號 Tuesday | 今日瀏覽: 1 | 累積瀏覽: 36         -->
 			<?php
-			$today=$Total->find(['date'=>date("Y-m-d")]);
-			$all=$Total->q(" select sum(`total`) from `total` ");
-			echo date("m月d日 l")." | 今日瀏覽：".$today['total']." |　累積瀏覽：".$all[0][0] ;
+			$today = $Total->find(['date' => date("Y-m-d")]);
+			$all = $Total->q(" select sum(`total`) from total");
+			echo date("m月d日 l") . " | 今日瀏覽：" . $today['total'] . " | 累積瀏覽：" . $all[0][0];
 			?>
 			<span style="float: right;"><a href="index.php">回首頁</a></span>
 		</div>
-		<div id="title2"><a href="index.php"><img src="img/02B01.jpg" alt="健康促進網 - 回首頁"></a></div>
+		<div id="title2"><a href="index.php"><img src="img/02B01.jpg" title="健康促進網 - 回首頁" alt="健康促進網 - 回首頁"></a></div>
 		<div id="mm">
 			<div class="hal" id="lef">
 				<a class="blo" href="?do=po">分類網誌</a>
@@ -39,18 +37,20 @@
 			<div class="hal" id="main">
 				<div>
 					<span style="width:80%; display:inline-block;">
-						<marquee>「請民眾踴躍投稿電子報，讓電子報成為大家相
-							互交流、分享的園地！詳見最新文章</marquee>
-							
+						<marquee>請民眾踴躍投稿電子報，讓電子報成為大家相互交流、分享的園地！詳見最新文章</marquee>
 					</span>
 					<span style="width:18%; display:inline-block;">
 					<?php
-					if(isset($_SESSION['login'])){
+					if(!empty($_SESSION['login'])){
+						echo "<span>歡迎,{$_SESSION['login']}</span>";
 						if($_SESSION['login']=='admin'){
-							echo "歡迎，".$_SESSION['login']."<br>";
-							echo "<button><a href='backend.php'>管理</a></button> | <button><a href='?do=api/logout.php'>登出</a></button>";
+							?>
+							<br><span><button><a href="backend.php">管理</a></button>|<button><a href="api/logout.php">登出</a></button></span>
+							<?php
 						}else{
-							echo "歡迎，".$_SESSION['login']."<button><a href='?do=api/logout.php'>登出</a></button>";
+							?>
+							<span><button><a href="api/logout.php">登出</a></button></span>
+							<?php
 						}
 					}else{
 						echo "<a href='?do=login'>會員登入</a>";
@@ -58,12 +58,12 @@
 					?>
 					</span>
 					<div class="">
-					<?php
-					$do=(isset($_GET['do']))?$_GET['do']:'main';
-					$file="front/".$do.".php";
-					if(file_exists($file)) include_once $file;
-					else include_once "front/main.php";
-					?>
+						<?php
+						$do=(isset($_GET['do']))?$_GET['do']:'main';
+						$file="front/".$do.".php";
+						if(file_exists($file)) include_once $file;
+						else include_once "front/main.php";
+						?>
 					</div>
 				</div>
 			</div>
