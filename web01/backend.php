@@ -21,10 +21,9 @@ include_once "base.php";
 			<div id="cvr" style="position:absolute; width:99%; height:100%; margin:auto; z-index:9898;"></div>
 		</div>
 	</div>
-	<iframe style="display:none;" name="back" id="back"></iframe>
 	<div id="main">
-		<a title="" href="index.php">
-			<div class="ti" style="background:url(&#39;use/&#39;); background-size:cover;"></div>
+		<a title="<?=$Title->find(['sh'=>1])['text'];?>" alt="<?=$Title->find(['sh'=>1])['text'];?>" href="index.php">
+			<div class="ti" style="background:url(&#39;img/<?=$Title->find(['sh'=>1])['img'];?>&#39;); background-size:cover;"></div>
 			<!--標題-->
 		</a>
 		<div id="ms">
@@ -72,8 +71,8 @@ include_once "base.php";
 				<table width="100%">
 					<tbody>
 						<tr>
-							<td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;" class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a></td>
-							<td><button onclick="document.cookie=&#39;user=&#39;;location.replace(&#39;?&#39;)" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
+							<td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;" class="cent"><a href="?do=title" style="color:#000; text-decoration:none;">後台管理區</a></td>
+							<td><button onclick="lo('api/logout.php')" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
 						</tr>
 					</tbody>
 				</table>

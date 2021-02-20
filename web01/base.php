@@ -5,10 +5,16 @@ date_default_timezone_set("Asia/Taipei");
 $Total=new DB("total");
 $Bottom=new DB("bottom");
 $Title=new DB("title");
+$Ad=new DB("Ad");
+$Admin=new DB("Admin");
+$Mvim=new DB("Mvim");
+$Menu=new DB("Menu");
+$Image=new DB("Image");
+$News=new DB("News");
 class DB{
     protected $table;
     protected $pdo;
-    protected $dsn="mysql:host=localhost;dbname=db01;";
+    protected $dsn="mysql:host=localhost;dbname=db01;charset=utf8";
 
     function __construct($table){
         $this->table=$table;
@@ -21,7 +27,7 @@ class DB{
                 foreach($arg[0] as $key => $value){
                     $tmp[]=sprintf("`%s`='%s'",$key,$value);
                 }
-                $sql.=implode(" && ",$tmp);
+                $sql.=" where ".implode(" && ",$tmp);
             }else{
                 $sql.=$arg[0];
             }
@@ -38,7 +44,7 @@ class DB{
                 foreach($arg[0] as $key => $value){
                     $tmp[]=sprintf("`%s`='%s'",$key,$value);
                 }
-                $sql.=implode(" && ",$tmp);
+                $sql.=" where ".implode(" && ",$tmp);
             }else{
                 $sql.=$arg[0];
             }
@@ -54,13 +60,14 @@ class DB{
             foreach($id as $key => $value){
                 $tmp[]=sprintf("`%s`='%s'",$key,$value);
             }
-            $sql.=implode(" && ",$tmp);
+            $sql.=" where ".implode(" && ",$tmp);
         }else{
             $sql.=" where id=$id";
         }
         if(isset($arg[1])){
             $sql.=$arg[1];
         }
+        // echo $sql;
         return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
     function del($id){
@@ -69,9 +76,9 @@ class DB{
             foreach($id as $key => $value){
                 $tmp[]=sprintf("`%s`='%s'",$key,$value);
             }
-            $sql.=implode(" && ",$tmp);
+            $sql.=" where ".implode(" && ",$tmp);
         }else{
-            $sql.=$id;
+            $sql.=" where id=$id";
         }
         if(isset($arg[1])){
             $sql.=$arg[1];

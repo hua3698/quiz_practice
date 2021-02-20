@@ -21,8 +21,8 @@ include_once "base.php";
 		</div>
 	</div>
 	<div id="main">
-		<a title="" href="index.php">
-			<div class="ti" style="background:url(&#39;use/&#39;); background-size:cover;"></div>
+		<a title="<?=$Title->find(['sh'=>1])['text'];?>" alt="<?=$Title->find(['sh'=>1])['text'];?>" href="index.php">
+			<div class="ti" style="background:url(&#39;img/<?=$Title->find(['sh'=>1])['img'];?>&#39;); background-size:cover;"></div>
 			<!--標題-->
 		</a>
 		<div id="ms">
@@ -35,12 +35,14 @@ include_once "base.php";
 					<span class="t">進站總人數 :<?= $Total->find(1)['total']; ?></span>
 				</div>
 			</div>
+<div class="di" style="height:540px; border:#999 1px solid; width:53.2%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
 			<?php
 			$do = (isset($_GET['do'])) ? $_GET['do'] : 'main';
 			$file = "./front/" . $do . ".php";
 			if (file_exists($file)) include $file;
 			else include "./front/main.php";
 			?>
+</div>
 			<div class="di di ad" style="height:540px; width:23%; padding:0px; margin-left:22px; float:left; ">
 				<!--右邊-->
 				<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo(&#39;?do=login&#39;)">管理登入</button>
