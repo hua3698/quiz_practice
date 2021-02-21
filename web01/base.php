@@ -11,6 +11,14 @@ $Mvim=new DB("Mvim");
 $Menu=new DB("Menu");
 $Image=new DB("Image");
 $News=new DB("News");
+
+if(empty($_SESSION['total'])){
+    $total=$Total->find(1);
+    $total['total']++;
+    $Total->save($total);
+    $_SESSION['total']=1;
+}
+
 class DB{
     protected $table;
     protected $pdo;
@@ -94,10 +102,10 @@ class DB{
         }else{
             $sql="insert into $this->table(`".implode("`,`",array_keys($arr))."`) values('".implode("','",$arr)."')";
         }
-        // print_r($sql);
         return $this->pdo->exec($sql);
     }
     function q($sql){
+        // print_r($sql);
         return $this->table->query($sql)->fetchAll();
     }
 }

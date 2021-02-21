@@ -14,7 +14,20 @@ foreach($_POST['id'] as $key => $id){
             case 'title':
                 $row['sh']=($id==$_POST['sh'])?1:0;
                 break;
+            case 'admin':
+                $row['acc']=$_POST['acc'][$key];
+                $row['pw']=$_POST['pw'][$key];
+                break;
+            case 'total':
+                $row['total']=$_POST['total'];
+                break;
+            case 'bottom':
+                $row['bottom']=$_POST['bottom'];
+                break;
             case '':
+                break;
+            default:
+                $row['sh']=(in_array($id,$_POST['sh']))?1:0;
                 break;
         }
     }
