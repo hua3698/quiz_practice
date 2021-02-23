@@ -12,7 +12,7 @@
                     <td></td>
                 </tr>
                 <?php
-                $menu=$Menu->all();
+                $menu=$Menu->all(['parent'=>0]);
                 foreach($menu as $t){
                 ?>
                 <tr>
@@ -21,7 +21,7 @@
                     <td><?=$Menu->count(['parent'=>$t['id']]);?></td>
                     <td><input type="checkbox" name="sh[]" value="<?=$t['id'];?>" <?=($t['sh']==1)?'checked':'';?>></td>
                     <td><input type="checkbox" name="del[]" value="<?=$t['id'];?>"></td>
-                    <td><input type="button" value="編輯次選單" onclick="op('#cover','#cvr','./pop/submenu.php?table=<?=$do;?>&id=<?=$t['id'];?>')"></td>
+                    <td><input type="button" value="編輯次選單" onclick="op('#cover','#cvr','./pop/submenu.php?parent=<?=$t['id'];?>')"></td>
                     <input type="hidden" name="id[]" value="<?=$t['id'];?>">
                 </tr>
                 <?php

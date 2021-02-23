@@ -21,8 +21,9 @@ include_once "base.php";
 		</div>
 	</div>
 	<div id="main">
-		<a title="<?=$Title->find(['sh'=>1])['text'];?>" alt="<?=$Title->find(['sh'=>1])['text'];?>" href="index.php">
-			<div class="ti" style="background:url(&#39;img/<?=$Title->find(['sh'=>1])['img'];?>&#39;); background-size:cover;"></div>
+		<a title="<?= $Title->find(['sh' => 1])['text']; ?>" alt="<?= $Title->find(['sh' => 1])['text']; ?>" href="index.php">
+			<div class="ti" style="background:url(&#39;img/<?= $Title->find(['sh' => 1])['img']; ?>&#39;); background-size:cover;">
+			</div>
 			<!--標題-->
 		</a>
 		<div id="ms">
@@ -30,26 +31,51 @@ include_once "base.php";
 				<div id="menuput" class="dbor">
 					<!--主選單放此-->
 					<span class="t botli">主選單區</span>
+					<?php
+					$main = $Menu->all(['parent' => 0]);
+					foreach ($main as $m) {
+					?>
+						<div class="mainmu">
+							<a style="color:#000; font-size:13px; text-decoration:none;" href="<?= $m['href']; ?>"><?= $m['text']; ?></a>
+							<div class="mw" style="display: none;z-index:55;position:absolute;">
+								<?php
+								if ($Menu->count(['parent' => $m['id']]) > 0) {
+									$sub = $Menu->all(['parent' => $m['id']]);
+									foreach ($sub as $s) {
+								?>
+											<div class="mainmu2"><?= $s['text']; ?>
+										<a style="color:#000; font-size:13px; text-decoration:none;" href="<?= $m['href']; ?>">
+										</a>
+											</div>
+								<?php
+									}
+								}
+								?>
+							</div>
+						</div>
+					<?php
+					}
+					?>
 				</div>
 				<div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
-					<span class="t">進站總人數 :<?=$Total->find(1)['total'];?>
+					<span class="t">進站總人數 :<?= $Total->find(1)['total']; ?>
 					</span>
 				</div>
 			</div>
-<div class="di" style="height:540px; border:#999 1px solid; width:53.2%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
-			<?php
-			$do = (isset($_GET['do'])) ? $_GET['do'] : 'main';
-			$file = "./front/" . $do . ".php";
-			if (file_exists($file)) include $file;
-			else include "./front/main.php";
-			?>
-</div>
+			<div class="di" style="height:540px; border:#999 1px solid; width:53.2%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
+				<?php
+				$do = (isset($_GET['do'])) ? $_GET['do'] : 'main';
+				$file = "./front/" . $do . ".php";
+				if (file_exists($file)) include $file;
+				else include "./front/main.php";
+				?>
+			</div>
 			<div class="di di ad" style="height:540px; width:23%; padding:0px; margin-left:22px; float:left; ">
 				<!--右邊-->
 				<?php
-				if(!empty($_SESSION['login'])){
+				if (!empty($_SESSION['login'])) {
 					echo "<button style='width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;' onclick='lo(&#39;backend.php&#39;)'>管理後台</button>";
-				}else{
+				} else {
 					echo "<button style='width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;' onclick='lo(&#39;?do=login&#39;)'>管理登入</button>";
 				}
 				?>
@@ -57,15 +83,16 @@ include_once "base.php";
 					<span class="t botli">校園映象區</span>
 					<div class="cent" style="margin: 10px;" onclick="pp(1)"><img src="icon/up.jpg" alt=""></div>
 					<?php
-					$image=$Image->all(['sh'=>1]);
-					foreach($image as $key=> $i){
+					$image = $Image->all(['sh' => 1]);
+					foreach ($image as $key => $i) {
 						echo "<div class='im cent' id='ssaa$key' style='margin:5px 0'><img src='img/{$i['img']}' style='width:150px;height:103px;border:3px solid orange'></div>";
 					}
 					?>
 					<div class="cent" style="margin: 10px;" onclick="pp(2)"><img src="icon/dn.jpg" alt=""></div>
 					<script>
 						var nowpage = 0,
-							num = 0;
+							num = <?= $Image->count(['sh' => 1]); ?>;
+
 						function pp(x) {
 							var s, t;
 							if (x == 1 && nowpage - 1 >= 0) {
