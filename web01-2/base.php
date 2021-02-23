@@ -1,35 +1,36 @@
 <?php
-session_start();
 date_default_timezone_set("Asia/Taipei");
+session_start();
 
-$Total=new DB("total");
-$Bottom=new DB("bottom");
-$Title=new DB("title");
+$Admin=new DB("admin");
 $Ad=new DB("Ad");
-$Admin=new DB("Admin");
+$Image=new DB("Image");
 $Mvim=new DB("Mvim");
 $Menu=new DB("Menu");
-$Image=new DB("Image");
+$Title=new DB("Title");
 $News=new DB("News");
+$Bottom=new DB("Bottom");
+$Total=new DB("Total");
 
 if(empty($_SESSION['total'])){
-    $total=$Total->find(1);
-    $total['total']++;
-    $Total->save($total);
+    $chk=$Total->find(1);
+    print_r($chk);
+    $chk['total']++;
+    $Total->save($chk);
     $_SESSION['total']=1;
 }
 
 class DB{
     protected $table;
+    protected $dsn="mysql:host=localhost;dbname=db011;charset=utf8";
     protected $pdo;
-    protected $dsn="mysql:host=localhost;dbname=db01;charset=utf8";
 
     function __construct($table){
-        $this->table=$table;
         $this->pdo=new PDO($this->dsn,'root','');
+        $this->table=$table;
     }
     function all(...$arg){
-        $sql="select * from $this->table ";
+        $sql="select * from $this->table";
         if(isset($arg[0])){
             if(is_array($arg[0])){
                 foreach($arg[0] as $key => $value){
@@ -46,7 +47,7 @@ class DB{
         return $this->pdo->query($sql)->fetchAll();
     }
     function count(...$arg){
-        $sql="select count(*) from $this->table ";
+        $sql="select count(*) from $this->table";
         if(isset($arg[0])){
             if(is_array($arg[0])){
                 foreach($arg[0] as $key => $value){
@@ -64,53 +65,51 @@ class DB{
         return $this->pdo->query($sql)->fetchColumn();
     }
     function find($id){
-        $sql="select * from $this->table ";
-        if(is_array($id)){
-            foreach($id as $key => $value){
-                $tmp[]=sprintf("`%s`='%s'",$key,$value);
+        $sql="select * from $this->table";
+        if(isset($id)){
+            if(is_array($id)){
+                foreach($id as $key => $value){
+                    $tmp[]=sprintf("`%s`='%s'",$key,$value);
+                }
+                $sql.=" where ".implode(" && ",$tmp);
+            }else{
+                $sql.=" where id=$id";
             }
-            $sql.=" where ".implode(" && ",$tmp);
-        }else{
-            $sql.=" where id=$id";
-        }
-        if(isset($arg[1])){
-            $sql.=$arg[1];
         }
         // echo $sql;
         return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
     function del($id){
-        $sql="delete from $this->table ";
-        if(is_array($id)){
-            foreach($id as $key => $value){
-                $tmp[]=sprintf("`%s`='%s'",$key,$value);
+        $sql="delete from $this->table";
+        if(isset($id)){
+            if(is_array($id)){
+                foreach($id as $key => $value){
+                    $tmp[]=sprintf("`%s`='%s'",$key,$value);
+                }
+                $sql.=" where ".implode(" && ",$tmp);
+            }else{
+                $sql.=" where id=$id";
             }
-            $sql.=" where ".implode(" && ",$tmp);
-        }else{
-            $sql.=" where id=$id";
-        }
-        if(isset($arg[1])){
-            $sql.=$arg[1];
         }
         return $this->pdo->exec($sql);
     }
     function save($arr){
         if(isset($arr['id'])){
-            foreach($arr as $key =>$value){
+            foreach($arr as $key => $value){
                 $tmp[]=sprintf("`%s`='%s'",$key,$value);
             }
-            $sql="update $this->table set ".implode(",",$tmp)." where id='{$arr['id']}'";
+            $sql="update $this->table set ".implode(",",$tmp)." where id={$arr['id']}";
         }else{
-            $sql="insert into $this->table(`".implode("`,`",array_keys($arr))."`) values('".implode("','",$arr)."')";
+            $sql="insert into $this->table (`".implode("`,`",array_keys($arr))."`) values ('".implode("','",$arr)."')";
         }
+        // echo $sql;
         return $this->pdo->exec($sql);
     }
     function q($sql){
-        // print_r($sql);
-        return $this->table->query($sql)->fetchAll();
+        return $this->pdo->query($sql)->fetchAll();
     }
 }
-
 function to($url){
     header("location:$url");
 }
+?>
