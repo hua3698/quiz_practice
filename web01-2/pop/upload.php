@@ -1,12 +1,12 @@
 <?php
-$str=[1=>'更新標題區圖片',2=>'更新動畫圖片'];
+$str=[1=>'標題區圖片',2=>'動畫圖片',3=>'校園印象資料圖片'];
 ?>
-<h2 class="cent"><?=$str[$_GET['str']];?></h2>
+<h2 class="cent">更新<?=$str[$_GET['str']];?></h2>
 <hr>
 <form action="api/upload.php" method="post" enctype="multipart/form-data">
     <table style="margin:auto">
         <tr>
-            <td>更新圖片：</td>
+            <td>圖片：</td>
             <td><input type="file" name="img" id=""></td>
         </tr>
         <tr>

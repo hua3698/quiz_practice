@@ -1,10 +1,14 @@
-<h2 class="cent">新增最新資料</h2>
+<h2 class="cent">新增主選單</h2>
 <hr>
 <form action="api/add.php" method="post" enctype="multipart/form-data">
     <table style="margin:auto">
         <tr>
-            <td>最新資料：</td>
-            <td><textarea name="text" style="width: 95%;height:50px"></textarea></td>
+            <td>主選單名稱：</td>
+            <td>主選單連結網址：</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="text" id=""></td>
+            <td><input type="text" name="href" id=""></td>
         </tr>
         <tr>
             <td><input type="submit" value="新增"><input type="reset"></td>

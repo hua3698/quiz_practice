@@ -21,7 +21,7 @@
                         <td><img src="img/<?=$a['img'];?>" style="width:100px;height:68px"></td>
                         <td><input type="checkbox" name="sh[]" value="<?=$a['id'];?>" <?=($a['sh']==1)?'checked':'';?>></td>
                         <td><input type="checkbox" name="del[]" value="<?=$a['id'];?>"></td>
-                        <td><input type="button" value="更新圖片" onclick="op('#cover','#cvr','pop/upload.php?table=<?=$do;?>&id=<?=$a['id'];?>&str=1')"></td>
+                        <td><input type="button" value="更新圖片" onclick="op('#cover','#cvr','pop/upload.php?table=<?=$do;?>&id=<?=$a['id'];?>&str=3')"></td>
                         <td><input type="hidden" name="table" value="<?=$do;?>"></td>
                         <td><input type="hidden" name="id[]" value="<?=$a['id'];?>"></td>
                     </tr>
@@ -35,6 +35,12 @@
                 if($now>1){
                     ?>
                     <a href="?do=image&p=<?=($now-1);?>"><</a>
+                    <?php
+                }
+                for($i=1;$i<=$pages;$i++){
+                    $font=($i==$now)?'2rem':'1rem';
+                    ?>
+                    <a href="?do=image&p=<?=$i;?>" style="padding:5px;font-size:<?=$font;?>"><?=$i;?></a>
                     <?php
                 }
                 if($now<$pages){

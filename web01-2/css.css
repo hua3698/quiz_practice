@@ -144,6 +144,11 @@ input:focus,button:focus
 {
 	box-shadow:#09C 0px 0px 3px .3px;
 }
+.yel
+{
+	background:#F3DA49;
+	text-align:center;
+}
 .yel td
 {
 	background:#F3DA49;

@@ -16,6 +16,15 @@ switch($_POST['table']){
     case 'title':
         $row['sh']=0;
     break;
+    case 'admin':
+        $row['acc']=$_POST['acc'];
+        $row['pw']=$_POST['pw'];
+    break;
+    case 'menu':
+        $row['href']=$_POST['href'];
+        $row['sh']=1;
+        $row['parent']=0;
+        break;
     default:
     $row['sh']=1;
     break;

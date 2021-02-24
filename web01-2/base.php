@@ -14,7 +14,6 @@ $Total=new DB("Total");
 
 if(empty($_SESSION['total'])){
     $chk=$Total->find(1);
-    print_r($chk);
     $chk['total']++;
     $Total->save($chk);
     $_SESSION['total']=1;

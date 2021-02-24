@@ -90,9 +90,19 @@
 				?>
                 <div style="width:89%; height:480px;" class="dbor">
                     <span class="t botli">校園映象區</span>
+                    <div class="cent"><img src="img/up.jpg" onclick="pp(1)"></div>
+                    <?php
+                    $image=$Image->all(['sh'=>1]);
+                    foreach($image as $key => $i){
+                        ?>
+                        <div class="im cent" style="margin:10px;" id="ssaa<?=$key;?>"><img src="img/<?=$i['img'];?>" style="border:3px solid orange;width:150px;height:103px;"></div>
+                        <?php
+                    }
+                    ?>
+                    <div class="cent"><img src="img/dn.jpg" onclick="pp(2)"></div>
                     <script>
                     var nowpage = 0,
-                        num = 0;
+                        num = <?=$Image->count();?>;
 
                     function pp(x) {
                         var s, t;
