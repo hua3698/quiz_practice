@@ -21,7 +21,7 @@
                             <td><?=$Menu->count(['parent'=>$a['id']]);?></td>
                             <td><input type="checkbox" name="sh[]" value="<?=$a['id'];?>" <?=($a['sh']==1)?'checked':'';?>></td>
                             <td><input type="checkbox" name="del[]" value="<?=$a['id'];?>"></td>
-                            <td><input type="button" value="編輯次選單" onclick="op('#cover','#cvr','pop/edit_sub.php?id=<?=$a['id'];?>')"></td>
+                            <td><input type="button" value="編輯次選單" onclick="op('#cover','#cvr','pop/edit_sub.php?parent=<?=$a['id'];?>')"></td>
                             <td><input type="hidden" name="table" value="<?=$do;?>"></td>
                             <td><input type="hidden" name="id[]" value="<?=$a['id'];?>"></td>
                         </tr>

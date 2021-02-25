@@ -3,13 +3,13 @@ $(document).ready(function(e) {
     $(".mainmu").mouseover(
 		function()
 		{
-			$(this).children(".mw").stop().show()
+			$(this).find(".mw").stop().show()
 		}
 	)
 	$(".mainmu").mouseout(
 		function ()
 		{
-			$(this).children(".mw").hide()
+			$(this).find(".mw").hide()
 		}
 	)
 });
