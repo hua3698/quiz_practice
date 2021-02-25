@@ -1,6 +1,6 @@
 <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
     <p class="t cent botli">網站標題管理</p>
-    <form method="post" action="api/edit.php">
+    <form method="post" target="back" action="?do=tii">
         <table width="100%">
             <tbody>
                 <tr class="yel">
@@ -11,20 +11,19 @@
                     <td></td>
                 </tr>
                 <?php
-                    $all=$Title->all();
-                    foreach($all as $a){
-                        ?>
-                        <tr>
-                            <td><img src="img/<?=$a['img'];?>" style="width:300px;height:30px"></td>
-                            <td><input type="text" name="text[]" value="<?=$a['text'];?>"></td>
-                            <td><input type="radio" name="sh" value="<?=$a['id'];?>" <?=($a['sh']==1)?'checked':'';?>></td>
-                            <td><input type="checkbox" name="del[]" value="<?=$a['id'];?>"></td>
-                            <td><input type="button" value="更新圖片" onclick="op('#cover','#cvr','pop/upload.php?table=<?=$do;?>&id=<?=$a['id'];?>&str=1')"></td>
-                            <td><input type="hidden" name="table" value="<?=$do;?>"></td>
-                            <td><input type="hidden" name="id[]" value="<?=$a['id'];?>"></td>
-                        </tr>
-                        <?php
-                    }
+                $all=$Title->all();
+                foreach($all as $a){
+                    ?>
+                    <tr>
+                        <td><img src="img/<?=$a['img'];?>" style="width:300px;height:30px"></td>
+                        <td><input type="text" name="text[]" value="<?=$a['text'];?>"></td>
+                        <td><input type="radio" name="sh" value="<?=$a['id'];?>" <?=($a['sh']==1)?'checked':'';?>></td>
+                        <td><input type="checkbox" name="del[]" value="<?=$a['id'];?>"></td>
+                        <td><input type="button" value="更新圖片" onclick="op('#cover','#cvr','pop/upload.php?t=1&id=<?=$a['id'];?>')"></td>
+                        <input type="hidden" name="id[]" value="<?=$a['id'];?>">
+                    </tr>
+                    <?php
+                }
                 ?>
             </tbody>
         </table>
@@ -39,5 +38,6 @@
                 </tr>
             </tbody>
         </table>
+
     </form>
 </div>

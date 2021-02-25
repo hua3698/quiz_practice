@@ -1,34 +1,32 @@
 <?php
 include_once "../base.php";
 $db=new DB($_POST['table']);
-$row=[];
-
+$data=[];
 if(isset($_POST['text'])){
-    $row['text']=$_POST['text'];
+    $data['text']=$_POST['text'];
 }
-
 if(isset($_FILES['img']['tmp_name'])){
     move_uploaded_file($_FILES['img']['tmp_name'],"../img/{$_FILES['img']['name']}");
-    $row['img']=$_FILES['img']['name'];
+    $data['img']=$_FILES['img']['name'];
 }
-
 switch($_POST['table']){
     case 'title':
-        $row['sh']=0;
-    break;
-    case 'admin':
-        $row['acc']=$_POST['acc'];
-        $row['pw']=$_POST['pw'];
+        $data['sh']=0;
+        break;
+    case 'bottom':
+        $data['bottom']=$_POST['bottom'];
+        break;
+    case 'total':
+        $data['total']=$_POST['total'];
     break;
     case 'menu':
-        $row['href']=$_POST['href'];
-        $row['sh']=1;
-        $row['parent']=0;
+        $data['href']=$_POST['href'];
+        $data['sh']=1;
         break;
     default:
-    $row['sh']=1;
+    $data['sh']=1;
     break;
 }
-$db->save($row);
-to("../backend.php?do={$_POST['table']}");
+$db->save($data);
+// to("../backend.php?do={$_POST['table']}");
 ?>

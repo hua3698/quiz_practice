@@ -1,11 +1,8 @@
-<!-- <div style="height:32px; display:block;"></div> -->
-<!--正中央-->
 <?php
-if(isset($_GET['e'])){
-    echo "<script>alert('帳號或密碼輸入錯誤')</script>";
+if(!empty($_GET['e'])){
+    echo "<script>alert('帳號或密碼錯誤')</script>";
 }
 ?>
-
 <form method="post" action="api/login.php">
     <p class="t botli">管理員登入區</p>
     <p class="cent">帳號 ： <input name="acc" type="text"></p>

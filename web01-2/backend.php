@@ -6,6 +6,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     <title>卓越科技大學校園資訊系統</title>
     <link href="css.css" rel="stylesheet" type="text/css">
     <script src="jquery-1.9.1.min.js"></script>
@@ -21,11 +22,9 @@
         </div>
     </div>
     <div id="main">
-        <?php
-            $title=$Title->find(['sh'=>1]);
-        ?>
-        <a title="<?=$title['text'];?>" alt="<?=$title['text'];?>" href="index.php">
-            <div class="ti" style="background:url(&#39;img/<?=$title['img'];?>&#39;); background-size:cover;"></div>
+		<?php $t=$Title->find(['sh'=>1]);?>
+        <a title="<?=$t['text'];?>" href="index.php">
+            <div class="ti" style="background:url(&#39;img/<?=$t['img'];?>&#39;); background-size:cover;"></div>
             <!--標題-->
         </a>
         <div id="ms">
@@ -34,7 +33,7 @@
                     <!--主選單放此-->
                     <span class="t botli">後台管理選單</span>
                     <a style="color:#000; font-size:13px; text-decoration:none;" href="?do=title">
-                        <div class="mainmu">網站標題管理 </div>
+                        <div class="mainmu">網站標題管理</div>
                     </a>
                     <a style="color:#000; font-size:13px; text-decoration:none;" href="?do=ad">
                         <div class="mainmu">動態文字廣告管理</div>
@@ -74,15 +73,16 @@
                             <td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;"
                                 class="cent"><a href="backend.php" style="color:#000; text-decoration:none;">後台管理區</a>
                             </td>
-                            <td><button onclick="lo('api/logout.php')" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
+                            <td><button onclick="lo('api/logout.php')"
+                                    style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
                         </tr>
                     </tbody>
                 </table>
 				<?php
-				$do=(isset($_GET['do']))?$_GET['do']:'title';
-				$file="back/".$do.".php";
-				if(file_exists($file)) include $file;
-				else include "back/title.php";
+					$do=(isset($_GET['do']))?$_GET['do']:'title';
+					$file="back/".$do.".php";
+					if(file_exists($file)) include $file;
+					else include "back/title.php";
 				?>
             </div>
             <div id="alt"
