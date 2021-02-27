@@ -28,7 +28,7 @@
 		$("#b").on("click",function(){
 			let acc=$("#acc").val(), pw=$("#pw").val();
 			let ans=$("#ans").val();
-			$.post("api/admin.php",{acc,pw,que,ans},function(re){
+			$.post("api/login.php",{acc,pw,que,ans},function(re){
 				switch(re){
 					case '1':
 						alert("對不起，您輸入的驗證碼有誤請您重新登入");

@@ -3,7 +3,7 @@ date_default_timezone_set("Asia/Taipei");
 session_start();
 
 $Bottom=new DB('bottom');
-$Mem=new DB('mem');
+$Member=new DB('member');
 $Admin=new DB('admin'); 
 $Type=new DB('type');
 $Goods=new DB("goods");
@@ -48,16 +48,12 @@ class DB{
                 foreach($arg[0] as $key => $value){
                     $tmp[]=sprintf("`%s`='%s'",$key,$value);
                 }
+                $sql .=" where ".implode(" && ",$tmp);
             }else{
                 $sql .=$arg[0];
             }
-            $sql .="where ".implode(" && ",$tmp);
         }
-
-        if(isset($arg[1])){
-            $sql .=$arg[1];
-        }
-        // print_r($sql);
+        // echo $sql;
         return $this->pdo->query($sql)->fetchColumn();
     }
 

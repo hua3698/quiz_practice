@@ -11,6 +11,7 @@
     <script src="jquery-3.4.1.min.js"></script>
     <script src="js.js"></script>
 </head>
+<!-- h1.ct+form:post>table.all>tr*6>td.tt.ct+td.pp -->
 
 <body>
     <div id="main">
@@ -23,7 +24,14 @@
                 <a href="?do=news">最新消息</a> |
                 <a href="?do=look">購物流程</a> |
                 <a href="?do=buycart">購物車</a> |
-                <a href="?do=login">會員登入</a> |
+                <?php
+                    if(!empty($_SESSION['admin'])){
+                        echo "<a href='api/logout.php?do=member'>會員登出</a>";
+                    }else{
+                        echo "<a href='?do=login'>會員登入</a>";
+                    }
+                    ?>|
+                
                     <?php
                     if(!empty($_SESSION['admin'])){
                         echo "<a href='backend.php'>返回管理</a>";
@@ -31,7 +39,6 @@
                         echo "<a href='?do=admin'>管理登入</a>";
                     }
                     ?>
-                
             </div>
             <marquee>
                 情人節特惠活動 &nbsp; 年終特賣會開跑了  
