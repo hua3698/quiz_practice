@@ -42,6 +42,7 @@
 						break;
 					case '3':
 						alert("帳號或密碼錯誤");
+						location.reload();
 					break;
 				}
 			})

@@ -28,17 +28,19 @@
 		$("#b").on("click",function(){
 			let acc=$("#acc").val(), pw=$("#pw").val();
 			let ans=$("#ans").val();
-			$.post("api/login.php",{acc,pw,que,ans},function(re){
+			$.post("api/login.php?do=admin",{acc,pw,que,ans},function(re){
 				switch(re){
 					case '1':
 						alert("對不起，您輸入的驗證碼有誤請您重新登入");
 						location.reload();
 					break;
 					case '2':
+						console.log(re);
 						location.href="backend.php";
 						break;
 					case '3':
 						alert("帳號或密碼錯誤");
+						location.reload();
 					break;
 				}
 			})

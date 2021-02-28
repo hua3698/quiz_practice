@@ -22,7 +22,7 @@ body
 	display:inline-block;
 	width:20%;
 	padding:2%;
-	min-height:550px;
+	height:550px;
 	vertical-align:top;
 	border:#000 1px solid;
 	margin-right: 12px;
@@ -45,8 +45,9 @@ body
 	display:inline-block;
 	width:70%;
 	padding:2%;
-	min-height:550px;
+	height:550px;
 	border:#000 1px solid;
+	overflow-y: auto;
 }
 #bottom
 {

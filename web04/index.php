@@ -25,7 +25,7 @@
                 <a href="?do=look">購物流程</a> |
                 <a href="?do=buycart">購物車</a> |
                 <?php
-                    if(!empty($_SESSION['admin'])){
+                    if(!empty($_SESSION['member'])){
                         echo "<a href='api/logout.php?do=member'>會員登出</a>";
                     }else{
                         echo "<a href='?do=login'>會員登入</a>";

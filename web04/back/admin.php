@@ -11,13 +11,16 @@
     ?>
     <tr class="pp">
         <td><?=$a['acc'];?></td>
-        <td><?=$a['pw'];?></td>
+        <td><?=str_repeat("*",strlen($a['pw']));?></td>
         <td>
             <?php
                 if($a['acc']=='admin'){
                     echo "此帳號為最高權限";
                 }else{
-                    echo "<input type='button' value='修改'><input type='button' value='刪除'>";
+                    ?>
+                    <input type="button" value="修改" onclick="javascript:location.href='?do=edit_admin&id=<?=$a['id'];?>'">
+                    <button onclick="del('admin',<?=$a['id'];?>)">刪除</button>
+                    <?php
                 }
             ?>
         </td>

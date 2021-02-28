@@ -13,10 +13,10 @@
     <tr class="pp">
         <td><?=$a['name'];?></td>
         <td><?=$a['acc'];?></td>
-        <td><?=$a['pw'];?></td>
+        <td><?=$a['regdate'];?></td>
         <td>
-            <a href="?do=edit_mem"><input type="button" value="修改"></a>
-            <input type="button" value="刪除">
+            <a href="?do=edit_mem&id=<?=$a['id'];?>"><input type="button" value="修改"></a>
+            <button onclick="del('member',<?=$a['id'];?>)">刪除</button>
         </td>
     </tr>
     <?php
