@@ -46,10 +46,10 @@
 </form>
 <script>
 getBig()
-getMid()
-    function getBig(){
-        $.post("api/type.php",{'do':'getBig'},function(re){
+function getBig(){
+    $.post("api/type.php",{'do':'getBig'},function(re){
             $("#big").html(re);
+            getMid()
         })
     }
     function getMid(){

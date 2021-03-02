@@ -51,7 +51,7 @@
         <td>商品名稱</td>
         <td>庫存量</td>
         <td>狀態</td>
-        <td>操作</td>
+        <td width="25%">操作</td>
     </tr>
     <?php
     $all = $Goods->all();

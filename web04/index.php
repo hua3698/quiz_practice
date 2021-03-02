@@ -45,8 +45,21 @@
             </marquee>
             <!-- 情人節特惠活動 &nbsp; 為了慶祝七夕情人節，將舉辦情人兩人到現場有七七折之特惠活動~ -->
         </div>
+        <?php
+            $count=$Type->q("select sum(`id`) from type where `parent`!=0")[0][0];
+            $big=$Type->all(['parent'=>0]);
+        ?>
         <div id="left" class="ct">
             <div style="min-height:400px;">
+            <div class="ww"><a href="?do=th">全部商品(<?=$count;?>)</a></div>
+            <?php
+            foreach($big as $b){
+                $c=$Type->q("select sum(`id`) from type where `parent`={$b['id']}")[0][0];
+                ?>
+                <div class="ww"><a href="?do=th"><?=$b['name'];?>(<?=$b;?>)</a></div>
+                <?php
+            }
+            ?>
             </div>
             <span>
                 <div>進站總人數</div>

@@ -32,7 +32,7 @@ body
 	display:block;
 	padding:20px 5px 20px 5px;
 	text-decoration:none;
-	background:#F4C591;
+	background:#ffdcdc;
 	margin:10px auto 10px auto;
 	color:#65350A;
 }
@@ -73,19 +73,19 @@ body
 }
 .tt
 {
-	background:#EF7429;
+	background:#f25287;
 }
 .tt td
 {
-	background:#EF7429;
+	background:#f25287;
 }
 .pp
 {
-	background:#EFCA85;
+	background:#f7d9d9;
 }
 .pp td
 {
-	background:#EFCA85;
+	background:#f7d9d9;
 }
 input[type=text],input[type=password],input[type=submit],button,.button,input[type=reset],input[type=button],select，textarea,input[type=number]
 {
