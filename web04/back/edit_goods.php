@@ -53,6 +53,7 @@ getBig()
 function getBig(){
     $.post("api/type.php",{'do':'getBig'},function(re){
             $("#big").html(re);
+            $("#big option[value='<?=$g['big'];?>']").prop("selected",true)
             getMid() 
         })
     }
@@ -60,8 +61,8 @@ function getBig(){
         let big=$("#big").val()
         console.log(big);
         $.post("api/type.php",{'do':'getMid',big},function(re){
-            console.log(re)
             $("#mid").html(re);
+            $("#mid option[value='<?=$g['mid'];?>']").prop("selected",true)
         })
     }
 </script>

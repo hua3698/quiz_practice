@@ -105,6 +105,9 @@ input[type=text],input[type=password]
 {
 	display:none;
 }
+.s>a{
+	background: #a6ddf3 !important;
+}
 div.ww:hover > div.s
 {
 	display:block;
@@ -112,4 +115,35 @@ div.ww:hover > div.s
 .sb button
 {
 	font-size:12px;
+}
+.con{
+	width: 80%;
+	margin: 0 auto;
+	display: flex;
+}
+.l{
+	width: 40%;
+	background: #f7c795;
+	margin: 2px;
+	padding: 5%;
+}
+.r{
+	width:60%;
+	margin: 2px;
+	display: flex;
+	flex-direction: column;
+}
+.a:nth-of-type(1) {flex-grow: 1;}
+.a:nth-of-type(2) {flex-grow: 1;}
+.a:nth-of-type(3) {flex-grow: 1;}
+.a:nth-of-type(4) {flex-grow: 2;}
+.a{
+	background: #f7c795;
+	padding: 5px;
+}
+.b{
+	text-align: center;
+	padding: 5px 20%;
+	background: #106eb9;
+	color: #F3F3F3;
 }

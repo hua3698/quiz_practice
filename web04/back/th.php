@@ -61,7 +61,7 @@
             <td><?= $a['no']; ?></td>
             <td><?= $a['name']; ?></td>
             <td><?= $a['stock']; ?></td>
-            <td id="sh"><?= ($a['sh']==1)?'販售中':'已下架'; ?></td>
+            <td id="sh<?=$a['id'];?>"><?= ($a['sh']==1)?'販售中':'已下架'; ?></td>
             <td>
                 <input type="button" value="修改" onclick="javascript:location.href='?do=edit_goods&id=<?=$a['id'];?>'">
                 <button onclick="del('goods',<?= $a['id']; ?>)">刪除</button>
@@ -110,7 +110,7 @@ function sh(id,status){
     $.post("api/type.php",{'do':'sh',status,id},function(re){
         // location.reload();
         let t=(re=='1')?'販售中':'已下架'
-        $("#sh").html(t)
+        $(`#sh${id}`).html(t)
     });
 }
 </script>

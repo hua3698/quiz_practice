@@ -1,4 +1,4 @@
-<?php include_once "base.php";?>
+<?php include_once "base.php"; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0039) -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -25,41 +25,49 @@
                 <a href="?do=look">購物流程</a> |
                 <a href="?do=buycart">購物車</a> |
                 <?php
-                    if(!empty($_SESSION['member'])){
-                        echo "<a href='api/logout.php?do=member'>會員登出</a>";
-                    }else{
-                        echo "<a href='?do=login'>會員登入</a>";
-                    }
-                    ?>|
-                
-                    <?php
-                    if(!empty($_SESSION['admin'])){
-                        echo "<a href='backend.php'>返回管理</a>";
-                    }else{
-                        echo "<a href='?do=admin'>管理登入</a>";
-                    }
-                    ?>
+                if (!empty($_SESSION['member'])) {
+                    echo "<a href='api/logout.php?do=member'>會員登出</a>";
+                } else {
+                    echo "<a href='?do=login'>會員登入</a>";
+                }
+                ?>|
+
+                <?php
+                if (!empty($_SESSION['admin'])) {
+                    echo "<a href='backend.php'>返回管理</a>";
+                } else {
+                    echo "<a href='?do=admin'>管理登入</a>";
+                }
+                ?>
             </div>
             <marquee>
-                情人節特惠活動 &nbsp; 年終特賣會開跑了  
+                情人節特惠活動 &nbsp; 年終特賣會開跑了
             </marquee>
             <!-- 情人節特惠活動 &nbsp; 為了慶祝七夕情人節，將舉辦情人兩人到現場有七七折之特惠活動~ -->
         </div>
         <?php
-            $count=$Type->q("select sum(`id`) from type where `parent`!=0")[0][0];
-            $big=$Type->all(['parent'=>0]);
+        $all = $Goods->count();
+        $big = $Type->all(['parent' => 0]);
         ?>
         <div id="left" class="ct">
             <div style="min-height:400px;">
-            <div class="ww"><a href="?do=th">全部商品(<?=$count;?>)</a></div>
-            <?php
-            foreach($big as $b){
-                $c=$Type->q("select sum(`id`) from type where `parent`={$b['id']}")[0][0];
-                ?>
-                <div class="ww"><a href="?do=th"><?=$b['name'];?>(<?=$b;?>)</a></div>
+                <div class="ww"><a href="?type=0">全部商品(<?= $all; ?>)</a></div>
                 <?php
-            }
-            ?>
+                foreach ($big as $b) {
+                    $mid=$Type->all(['parent'=>$b['id']]);
+                ?>
+                    <div class="ww"><a href="?type=<?=$b['id'];?>"><?= $b['name']; ?>(<?= $Goods->count(['big' => $b['id']]); ?>)</a>
+                        <?php
+                        foreach($mid as $m){
+                            ?>
+                            <div class="s"><a href="?type=<?=$m['id'];?>"><?=$m['name'];?>(<?=$Goods->count(['mid'=>$m['id']]);?>)</a></div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                <?php
+                }
+                ?>
             </div>
             <span>
                 <div>進站總人數</div>
@@ -69,13 +77,13 @@
         </div>
         <div id="right">
             <?php
-            $do=(isset($_GET['do']))?$_GET['do']:'main';
-            $file="front/".$do.".php";
-            if(file_exists($file)) include $file;
+            $do = (isset($_GET['do'])) ? $_GET['do'] : 'main';
+            $file = "front/" . $do . ".php";
+            if (file_exists($file)) include $file;
             else include "front/main.php";
             ?>
         </div>
-        <div id="bottom" style="line-height:70px;background:url(icon/bot.png); color:#FFF;" class="ct"><?=$Bottom->find(1)['bottom'];?></div>
+        <div id="bottom" style="line-height:70px;background:url(icon/bot.png); color:#FFF;" class="ct"><?= $Bottom->find(1)['bottom']; ?></div>
     </div>
 
 </body>
