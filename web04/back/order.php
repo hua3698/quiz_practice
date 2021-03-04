@@ -13,11 +13,11 @@
     foreach($all as $a){
     ?>
     <tr class="pp">
-        <td><a href="?do=order_detail&id=<?=$a['id'];?>"><?=$a['id'];?></a></td>
+        <td><a href="?do=order_detail&id=<?=$a['id'];?>"><?=$a['no'];?></a></td>
         <td><?=$a['total'];?></td>
         <td><?=$a['acc'];?></td>
         <td><?=$a['name'];?></td>
-        <td><?=$a['orddate'];?></td>
+        <td><?=$a['ord_time'];?></td>
         <td><button onclick="del('ord',<?=$a['id'];?>)">刪除</button></td>
     </tr>
     <?php

@@ -19,11 +19,13 @@ if (empty($type)) {
 foreach ($goods as $g) {
 ?>
     <div class="con">
-        <div class="l"><img src="img/<?= $g['img']; ?>" style="width:100%;height:100%"></div>
+        <div class="l">
+            <a href="?do=detail&id=<?=$g['id'];?>"><img src="img/<?= $g['img']; ?>" style="width:100%;height:100%"></a>
+        </div>
         <div class="r">
             <div class="a b"><?= $g['name']; ?></div>
             <div class="a" style="margin:2px 0;">價錢:<?= $g['price']; ?>
-            <a href="?do=buycart&id=<?=$g['id'];?>&qt=1"><img src="icon/0402.jpg" style="float:right"></a>
+            <a href="?do=buycart&goods=<?=$g['id'];?>&qt=1"><img src="icon/0402.jpg" style="float:right"></a>
             </div>
             <div class="a" style="margin:2px 0;">規格:<?= $g['spec']; ?></div>
             <div class="a">簡介: <pre><?= $g['intro']; ?></pre></div>
