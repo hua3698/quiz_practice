@@ -1,5 +1,5 @@
 <?php
-$a = $Ord->find($_GET['no']);
+$a = $Ord->find(['no'=>$_GET['no']]);
 ?>
 <h1 class="ct">訂單編號<span style="color:red"><?= $a['no']; ?></span>的詳細資料</h1>
 <table class="all ct">

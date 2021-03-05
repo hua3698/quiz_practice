@@ -1,4 +1,4 @@
-<?php include_once "base.php" ;?>
+<?php include_once "base.php"; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0039) -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -10,13 +10,18 @@
     <link href="css.css" rel="stylesheet" type="text/css">
     <script src="js.js"></script>
     <script src="jquery-1.9.1.min.js"></script>
+    <style>
+        .s>a{
+            background: lightblue!important;
+        }
+    </style>
 </head>
 
 <body>
     <div id="main">
         <div id="top">
-            <a href="?">
-                <img src="icon/0416.jpg">
+            <a href="index.php">
+                <img src="icon/0416.jpg" style="width: 69%;">
             </a>
             <div style="padding:10px;">
                 <a href="index.php">回首頁</a> |
@@ -31,6 +36,25 @@
         </div>
         <div id="left" class="ct">
             <div style="min-height:400px;">
+                <?php
+                $all = $Goods->count()[0][0];
+                echo "<a href='?'>全部商品($all)</a>";
+                $big = $Type->all(['parent' => 0]);
+                foreach ($big as $b) {
+                ?>
+                    <div class="ww"><a href="?type=<?= $b['id']; ?>"><?= $b['name']; ?>(<?= $Goods->count(['sh'=>1,'big' => $b['id']])[0][0]; ?>)</a>
+                        <?php
+                        $mid = $Type->all(['parent' => $b['id']]);
+                        foreach ($mid as $m) {
+                        ?>
+                            <div class="s"><a href="?type=<?= $m['id']; ?>"><?= $m['name']; ?>(<?= $Goods->count(['sh'=>1,'mid' => $m['id']])[0][0]; ?>)</a></div>
+                            <?php
+                        }
+                        ?>
+                        </div>
+                        <?php
+                    }
+                    ?>
             </div>
             <span>
                 <div>進站總人數</div>
