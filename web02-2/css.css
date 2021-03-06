@@ -31,7 +31,7 @@ a:hover
 }
 #mm
 {
-	min-height:530px;
+	min-height:520px;
 }
 #all
 {
@@ -56,7 +56,7 @@ a:hover
 	padding:2px;
 	background:url(img/02B04.png) repeat-y;
 	/*background-size:100% auto;*/
-	height:530px;
+	min-height:520px;
 	display:inline-block;
 	vertical-align:top;
 	position:relative;
@@ -70,7 +70,7 @@ a:hover
 {
 	display:inline-block;
 	width:78%;
-	height:530px;
+	height:520px;
 	padding:4px;
 	border:solid 1px #000000;
 	overflow:auto;
@@ -84,7 +84,7 @@ a:hover
 #bottom
 {
 	text-align:right;
-	padding:12px 24px;
+	padding:2px 12px;
 }
 a.button
 {
@@ -278,13 +278,7 @@ cursor:default;
 	background-position:0px 2px;
 }
 .alerr{
-	background:rgba(51,51,51,0.8); 
-	color:#FFF; 
-	min-height:100px; 
-	width:300px; 
-	position:fixed; 
-	display:none; 
-	z-index:9999; 
+	background:rgba(51,51,51,0.8); color:#FFF; min-height:100px; width:300px; position:fixed; display:none; z-index:9999; overflow:auto;
 }
 .alerr h3
 {

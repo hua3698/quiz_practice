@@ -1,9 +1,10 @@
 <fieldset>
-    <legend>目前位置：首頁 > 最新文章區</legend>
+    <legend>目前位置：首頁 > 人氣文章區</legend>
     <table style="width: 90%; margin:auto" class="ct">
         <tr>
-            <th width="40%">標題</th>
-            <th width="40%">內容</th>
+            <th width="35%">標題</th>
+            <th width="35%">內容</th>
+            <th width="20%">人氣</th>
             <th></th>
         </tr>
         <?php
@@ -11,15 +12,19 @@
         $pages = ceil($News->count() / $per);
         $now = $_GET['p'] ?? '1';
         $start = ($now - 1) * $per;
-        $all = $News->all(['sh'=>1]," limit $start,$per");
+        $all = $News->all(['sh'=>1],"order by `good` desc limit $start,$per");
         foreach ($all as $key => $a) {
         ?>
             <tr>
                 <td class="ar" style="background:#eee;padding:10px"><?= $a['title']; ?></td>
                 <td>
                     <span><?= mb_substr($a['text'],0,10); ?>...</span>
-                    <span style="display: none;"><pre><?= $a['text']; ?></pre></span>
+                    <span class="alerr" style="display: none;">
+                    <h3><?= $a['title']; ?></h3>
+                    <pre><?= $a['text']; ?></pre>
+                    </span>
                 </td>
+                <td><?=$News->find($a['id'])['good'];?>個人說<img src="img/02B03.jpg" style="width:20px"></td>
                 <td>
                     <?php
                     if(!empty($_SESSION['login'])){
@@ -55,7 +60,7 @@
 </fieldset>
 
 <script>
-    $(".ar").on("click",function(){
+    $(".ar").hover(function(){
         $(this).next().children("span").toggle();
     })
 

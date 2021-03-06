@@ -1,5 +1,4 @@
-﻿<?php include_once "base.php";
-?>
+﻿<?php include_once "base.php"; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0039) -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -14,56 +13,60 @@
 </head>
 
 <body>
-	<div id="alerr" style="background:rgba(51,51,51,0.8); color:#FFF; min-height:100px; width:300px; position:fixed; display:none; z-index:9999; overflow:auto;">
-		<pre id="ssaa"></pre>
+	<div id="alerr">
+		<pre></pre>
 	</div>
 	<div id="all">
 		<div id="title">
 			<!-- 00 月 00 號 Tuesday | 今日瀏覽: 1 | 累積瀏覽: 36  -->
 			<?php
-			$today=$Total->find(['date'=>date("Y-m-d")]);
-			$all=$Total->q(" select sum(`total`) from `total` ");
-			echo date("m月d日 l")." | 今日瀏覽：".$today['total']." |　累積瀏覽：".$all[0][0] ;
+			$today = $Total->find(['date' => date("Y-m-d")])['total'];
+			$to = $Total->q("select count(`total`) from total ")[0][0];
+			echo date("m月 d日 l") . " | 今日瀏覽:";
+			echo $today . " | 累計瀏覽:";
+			echo $to;
 			?>
-			<span style="float: right;"><a href="index.php">回首頁</a></span>
+			<a href="index.php" style="float:right">回首頁</a>
 		</div>
-		<div id="title2"><a href="index.php"><img src="img/02B01.jpg" alt="健康促進網 - 回首頁"></a></div>
+		<div id="title2"><a href="index.php"><img src="img/02B01.jpg" alt=""></a></div>
 		<div id="mm">
 			<div class="hal" id="lef">
 				<a class="blo" href="?do=po">分類網誌</a>
 				<a class="blo" href="?do=news">最新文章</a>
 				<a class="blo" href="?do=pop">人氣文章</a>
-				<a class="blo" href="?do=#">講座訊息</a>
+				<a class="blo" href="?do=know">講座訊息</a>
 				<a class="blo" href="?do=que">問卷調查</a>
 			</div>
 			<div class="hal" id="main">
 				<div>
 					<span style="width:80%; display:inline-block;">
-						<marquee>「請民眾踴躍投稿電子報，讓電子報成為大家相
-							互交流、分享的園地！詳見最新文章</marquee>
-							
+						<marquee>請民眾踴躍投稿電子報，讓電子報成為大家相互交流、分享的園地！詳見最新文章</marquee>
 					</span>
 					<span style="width:18%; display:inline-block;">
-					<?php
-					if(isset($_SESSION['login'])){
-						if($_SESSION['login']=='admin'){
-							echo "歡迎，".$_SESSION['login']."<br>";
-							echo "<button><a href='backend.php'>管理</a></button> | <button><a href='?do=api/logout.php'>登出</a></button>";
-						}else{
-							echo "歡迎，".$_SESSION['login']."<button><a href='?do=api/logout.php'>登出</a></button>";
-						}
-					}else{
-						echo "<a href='?do=login'>會員登入</a>";
-					}
-					?>
+						<a href="?do=login">
+							<?php
+								if(empty($_SESSION['login'])){
+									echo "<a href='?do=login'>會員登入</a>";
+								}else{
+									if($_SESSION['login']=='admin'){
+										echo "歡迎，admin<br>";
+										echo "<button><a href='backend.php'>管理</a></button> | <button><a href='api/logout.php'>登出</a></button>";
+									}else{
+										echo "歡迎，{$_SESSION['login']}";
+										echo "<button><a href='api/logout.php'>登出</a></button>";
+									}
+								}
+							?>
+						</a>
+						
 					</span>
 					<div class="">
-					<?php
-					$do=(isset($_GET['do']))?$_GET['do']:'main';
-					$file="front/".$do.".php";
-					if(file_exists($file)) include_once $file;
-					else include_once "front/main.php";
-					?>
+						<?php
+						$do=$_GET['do']??'main';
+						$file="front/".$do.".php";
+						if(file_exists($file)) include $file;
+						else include "front/main.php";
+						?>
 					</div>
 				</div>
 			</div>
